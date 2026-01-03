@@ -7,7 +7,7 @@ Since `docker-compose` might not be available or fully configured on all environ
 ### Prerequisites
 - **.NET 9.0 SDK**
 - **Node.js** (LTS version recommended)
-- **PostgreSQL**: Ensure a local instance is running.
+- **MySQL**: Ensure a local instance is running.
 - **Redis**: (Optional) If required by the backend features.
 
 ### 1. Backend (API)
@@ -17,7 +17,7 @@ The backend is a .NET Web API. Run it from the solution root:
 dotnet run --project SecureVault.Api
 ```
 
-**Configuration**: Check `SecureVault.Api/appsettings.json` to ensure the `ConnectionStrings:DefaultConnection` matches your local PostgreSQL credentials (user, password, database name).
+**Configuration**: Check `SecureVault.Api/appsettings.json` to ensure the `ConnectionStrings:DefaultConnection` matches your local MySQL credentials (user, password, database name).
 
 ### 2. Frontend (React)
 The frontend is built with Vite. Open a separate terminal:
