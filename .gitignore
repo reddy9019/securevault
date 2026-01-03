@@ -1,0 +1,23 @@
+# Node / Frontend
+node_modules/
+dist/
+.vite/
+
+# .NET
+bin/
+obj/
+
+# Environment files
+.env
+.env.*
+appsettings.Development.json
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/

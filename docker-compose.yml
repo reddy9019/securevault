@@ -1,0 +1,50 @@
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: reddy
+      MYSQL_DATABASE: SecureVault
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - securevault-network
+
+  api:
+    build:
+      context: .
+      dockerfile: SecureVault.Api/Dockerfile
+    ports:
+      - "5000:8080"
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=db;Port=3306;Database=SecureVault;User=root;Password=reddy;
+      - Redis__ConnectionString=redis:6379
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - db
+      - redis
+    networks:
+      - securevault-network
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - securevault-network
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - securevault-network
+
+networks:
+  securevault-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
